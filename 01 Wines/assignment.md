@@ -1,5 +1,0 @@
-- Analyzujte dataset informací o vínech.
-- Zjištete co nejvíce informací o tomto datasetu.
-- V notebooku by mel být zrejmý postup analýzy.  
-- Využijte textové bunky, kam zjištené informace zapíšete. (Tak at tomu rozumím a poctu si). 
-- Pripravte dataset pro další použití pro ML.
