@@ -1,0 +1,1 @@
+open notebook by running `python -m notebook`
