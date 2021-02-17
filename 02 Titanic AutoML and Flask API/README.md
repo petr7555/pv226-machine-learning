@@ -27,7 +27,7 @@ tensorflow
 ```
 
 - Build container:
-`docker build -t titanic-api-image .`
+  `docker build -t titanic-api-image .`
 - Run container:
   `docker run -d --name titanic-api -p 5000:5000 titanic-api-image`
 - Stop and remove container:
@@ -50,5 +50,4 @@ because it is MUCH MUCH MUCH faster when installing pip dependencies.
 Overall, the installation is still slow, because it needs almost 400 MB large tensorflow.
 alpine also needs `RUN apk add --no-cache gcc musl-dev linux-headers` in Dockerfile
 
-TODO:
-gunicorn --chdir api main:app
+It is important to use `0.0.0.0`, not `127.0.0.1`, because of Docker.
