@@ -1,4 +1,10 @@
-With help of https://docs.docker.com/compose/gettingstarted/.
+## This application is running on [Heroku](https://titanic-autokeras-api.herokuapp.com/).
+
+## API Documentation
+https://documenter.getpostman.com/view/9355808/TWDUqyFz
+
+With help of https://docs.docker.com/compose/gettingstarted/ and
+https://dev.to/erenaspire7/deploying-a-dockerized-flask-app-to-heroku-5h7j.
 
 Create virtual environment:
 
@@ -51,3 +57,23 @@ Overall, the installation is still slow, because it needs almost 400 MB large te
 alpine also needs `RUN apk add --no-cache gcc musl-dev linux-headers` in Dockerfile
 
 It is important to use `0.0.0.0`, not `127.0.0.1`, because of Docker.
+
+## Deploy to Heroku as a container
+- Create a Heroku app (online in [GUI](https://dashboard.heroku.com/)).
+- Sign into Container Registry.
+  `heroku container:login`
+- Build the Dockerfile in the current directory and push the Docker image.
+  `heroku container:push web --app titanic-autokeras-api`
+- Release the newly pushed images to deploy your app.
+  `heroku container:release web --app titanic-autokeras-api`
+- Enable `web` dyno in [GUI](https://dashboard.heroku.com/).
+- Add
+```python
+if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 5123))
+    app.run(host='0.0.0.0', port=port)
+```
+to bind to Heroku's $PORT.
+
+Also, neither `flask run` nor `gunicorn --chdir api main:app` worked, I had to go with
+`python main.py`.

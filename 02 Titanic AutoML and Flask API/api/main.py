@@ -1,3 +1,4 @@
+import os
 from flask import Flask, request, jsonify
 import pandas as pd
 import numpy as np
@@ -25,4 +26,6 @@ def predict_survival():
 
 
 if __name__ == '__main__':
-    app.run()
+    # use PORT environment variable if available (on Heroku), otherwise use default 5123
+    port = int(os.environ.get('PORT', 5123))
+    app.run(host='0.0.0.0', port=port)
