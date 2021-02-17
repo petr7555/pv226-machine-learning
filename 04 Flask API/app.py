@@ -4,7 +4,7 @@ import numpy as np
 import autokeras as ak
 from tensorflow.keras.models import load_model
 
-loaded_model = load_model("../02 Titanic AutoML/model_autokeras", custom_objects=ak.CUSTOM_OBJECTS)
+loaded_model = load_model("../02 Titanic AutoML and Flask API/model_autokeras", custom_objects=ak.CUSTOM_OBJECTS)
 
 app = Flask(__name__)
 
