@@ -1,3 +1,5 @@
+With help of https://docs.docker.com/compose/gettingstarted/.
+
 Create virtual environment:
 
 - `python -m venv venv`
@@ -44,11 +46,9 @@ Interactive terminal:
 `docker exec -it <container_name> /bin/bash`
 
 Use python:3.8-slim instead of python:3.8-alpine, 
-because it is MUCH faster when installing pip dependencies.
+because it is MUCH MUCH MUCH faster when installing pip dependencies.
 Overall, the installation is still slow, because it needs almost 400 MB large tensorflow.
-`RUN apk add --no-cache gcc musl-dev linux-headers` is then removed, when using slim.
-
+alpine also needs `RUN apk add --no-cache gcc musl-dev linux-headers` in Dockerfile
 
 TODO:
-try original but without apk
 gunicorn --chdir api main:app
