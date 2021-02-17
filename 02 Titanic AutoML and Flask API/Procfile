@@ -1,1 +1,0 @@
-gunicorn --chdir api main:app

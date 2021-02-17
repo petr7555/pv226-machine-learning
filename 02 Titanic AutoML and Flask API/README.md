@@ -15,20 +15,14 @@ Inside `main.py`, have an `app` object.
 Create `requirements.txt` by executing (pip is case-insensitive, so flask=Flask):
 `pip freeze > requirements.txt`
 
-Create `runtime.txt` with python version, for example:
-`python-3.8.7` (find out python version by running `python --version`)
-
-Create `Procfile` with `gunicorn --chdir api main:app`.
-We change directory to `api`, because that is where `main.py` is. 
-`app` is the name of our Flask object.
-
-Create Dockerfile in root folder with contents:
+Or list the dependencies manually (versions are inferred):
 ```
-FROM tiangolo/uwsgi-nginx-flask:python3.8
-
-COPY ./api /app
+flask
+pandas
+numpy
+autokeras
+tensorflow
 ```
-Destination directory must be /app.
 
 - Build container:
 `docker build -t titanic-api-image .`
@@ -40,21 +34,21 @@ Destination directory must be /app.
   `docker rm -f titanic-api`
 - for all containers:
   `docker kill $(docker ps -q); docker rm $(docker ps -aq)`
-- or:
+- or (for all containers):
   `docker rm -f $(docker ps -aq)`
 
 ### Using docker compose instead of building separate container:
-`docker compose up --build` (without --build option the image wouldn't be rebuilt)
+`docker compose up --build` (without `--build` option the image wouldn't be rebuilt)
 
 Interactive terminal:
 `docker exec -it <container_name> /bin/bash`
 
-Using python:3.7-slim instead of python:3.7-alpine, 
-because it is MUCH faster to install pip dependencies.
+Use python:3.8-slim instead of python:3.8-alpine, 
+because it is MUCH faster when installing pip dependencies.
+Overall, the installation is still slow, because it needs almost 400 MB large tensorflow.
 `RUN apk add --no-cache gcc musl-dev linux-headers` is then removed, when using slim.
 
 
 TODO:
 try original but without apk
-add tensorflow to requirements.txt
-gunicorn
+gunicorn --chdir api main:app

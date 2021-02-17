@@ -3,4 +3,5 @@ services:
   web:
     build: .
     ports:
+#     app will be available on port 5001
       - "5001:5000"
