@@ -5,12 +5,13 @@ import autokeras as ak
 from tensorflow.keras.models import load_model
 
 loaded_model = load_model("../model_autokeras", custom_objects=ak.CUSTOM_OBJECTS)
-
 app = Flask(__name__)
+
 
 @app.route("/")
 def hello():
-    return "Hello World from Flask"
+    return "Hello"
+
 
 @app.route('/api/survival', methods=['GET'])
 def predict_survival():
